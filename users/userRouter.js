@@ -5,9 +5,6 @@ const db = require('./userDb');
 const postDb = require('../posts/postDb');
 
 
-
-
-
 router.get('/', (req, res) => {
     db.get()
         .then((users) => {
@@ -19,7 +16,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', validateUserId, (req, res) => {
-    //enter 404 for invalid id
     const id = req.params.id;
     db.getById(id)
         .then((user) => {
@@ -30,7 +26,6 @@ router.get('/:id', validateUserId, (req, res) => {
             res.status(500).json({ message: "doh" })
         })
 });
-
 
 router.get('/:id/posts', validateUserId, (req, res) => {
     const userId = req.params.id;
@@ -52,7 +47,6 @@ router.delete('/:id', validateUserId, (req, res) => {
         .catch(() => {
             res.status(500).json({ message: "doh" })
         })
-
 });
 
 router.put('/:id', validateUserId, validateUser, (req, res) => {
